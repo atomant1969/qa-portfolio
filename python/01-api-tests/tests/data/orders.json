@@ -1,0 +1,17 @@
+{
+  "valid_order": {
+    "customer": "Robert Joyce",
+    "product_id": 1,
+    "quantity": 2
+  },
+  "second_order": {
+    "customer": "Second Customer",
+    "product_id": 2,
+    "quantity": 1
+  },
+  "out_of_stock_order": {
+    "customer": "Blocked Buyer",
+    "product_id": 3,
+    "quantity": 1
+  }
+}

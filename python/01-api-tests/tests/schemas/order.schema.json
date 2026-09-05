@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "required": ["id", "customer", "product_id", "quantity", "status", "created_at"],
+  "properties": {
+    "id": {"type": "string", "format": "uuid"},
+    "customer": {"type": "string"},
+    "product_id": {"type": "integer"},
+    "quantity": {"type": "integer", "minimum": 1, "maximum": 100},
+    "status": {"type": "string", "enum": ["created", "paid", "shipped", "cancelled"]},
+    "created_at": {"type": "string", "format": "date-time"}
+  }
+}
