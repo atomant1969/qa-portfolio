@@ -1,0 +1,95 @@
+name: Portfolio Validation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    name: Python - ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - 01-api-tests
+          - 02-ui-tests
+          - 03-e2e-tests
+          - 04-load-tests
+          - 05-integration-tests
+          - 06-database-tests
+          - 07-security-tests
+          - 08-mobile-tests
+          - 09-performance-tests
+          - 10-test-utilities
+          - 11-ci-cd
+          - 12-ai-assisted-testing
+          - 13-documentation
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        working-directory: python/${{ matrix.project }}
+        run: pip install -r requirements.txt
+
+      - name: Install Playwright browser
+        if: contains(fromJson('["02-ui-tests", "03-e2e-tests", "08-mobile-tests"]'), matrix.project)
+        working-directory: python/${{ matrix.project }}
+        run: playwright install --with-deps chromium
+
+      - name: Run pytest
+        working-directory: python/${{ matrix.project }}
+        run: pytest
+
+  typescript:
+    name: TypeScript - ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - 01-api-tests
+          - 02-ui-tests
+          - 03-e2e-tests
+          - 04-load-tests
+          - 05-integration-tests
+          - 06-database-tests
+          - 07-security-tests
+          - 08-mobile-tests
+          - 09-performance-tests
+          - 10-test-utilities
+          - 11-ci-cd
+          - 12-ai-assisted-testing
+          - 13-documentation
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        working-directory: typescript/${{ matrix.project }}
+        run: npm install
+
+      - name: Install Playwright browser
+        working-directory: typescript/${{ matrix.project }}
+        run: npx playwright install --with-deps chromium
+
+      - name: Typecheck
+        working-directory: typescript/${{ matrix.project }}
+        run: npm run typecheck
+
+      - name: Run Playwright tests
+        working-directory: typescript/${{ matrix.project }}
+        run: npm test

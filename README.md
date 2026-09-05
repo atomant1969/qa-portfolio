@@ -12,6 +12,8 @@ Start with:
 - `python/README.md` for Python examples.
 - `typescript/README.md` for Playwright TypeScript examples.
 
+GitHub Actions validation runs from `.github/workflows/portfolio-validation.yml` and checks every numbered Python and TypeScript mini-project.
+
 ## Portfolio Map
 
 | Area | Python | TypeScript |
