@@ -1,6 +1,6 @@
 # Python QA Portfolio
 
-This directory mirrors the full QA portfolio map. Each numbered folder is treated as its own standalone Python mini-project with its own tests and setup files.
+This directory mirrors the full QA portfolio map. Each numbered folder is treated as its own standalone Python mini-project with its own tests, fixtures, configuration, and setup files.
 
 ## Structure
 
@@ -35,13 +35,13 @@ python/
 | Directory | Current status |
 | --- | --- |
 | `01-api-tests/` | Working pytest API tests for the demo FastAPI app. |
-| `02-ui-tests/` | Scaffold for future Playwright or Selenium Python UI tests. |
-| `03-e2e-tests/` | Placeholder for API + UI scenarios. |
+| `02-ui-tests/` | Working Playwright Python UI tests with a Page Object fixture. |
+| `03-e2e-tests/` | Working API-style setup plus UI validation scenario. |
 | `04-load-tests/` | JMeter examples for JDBC and TCP load testing. |
 | `05-integration-tests/` | Working cross-layer order lifecycle test. |
-| `06-database-tests/` | Placeholder for SQL validation and migration checks. |
-| `07-security-tests/` | Placeholder for OWASP-style security checks. |
-| `08-mobile-tests/` | Placeholder for mobile automation examples. |
+| `06-database-tests/` | Working SQLite schema and aggregate validation tests. |
+| `07-security-tests/` | Working security-rule tests for injection and authorization logic. |
+| `08-mobile-tests/` | Working Playwright Python mobile viewport test. |
 | `09-performance-tests/` | Working statistical quality metric test. |
 | `10-test-utilities/` | Python CLI utilities for data generation and test result analysis. |
 | `11-ci-cd/` | GitHub Actions workflow example. |
@@ -50,10 +50,20 @@ python/
 
 ## How To Run
 
+Install the common review environment from the `python/` directory:
+
 ```powershell
-cd python\01-api-tests
+cd python
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+playwright install chromium
+```
+
+Run an individual mini-project from its own directory:
+
+```powershell
+cd python\01-api-tests
 pip install -r requirements.txt
 pytest
 ```
